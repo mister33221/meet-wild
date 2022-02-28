@@ -13,16 +13,26 @@ export class LoginComponent implements OnInit {
   focus;
   focus1;
 
-  form: any = {
+  loginForm: any = {
     username: null,
     password: null,
   };
+  registerForm: any = {
+    username: null,
+    mail: null,
+    password: null,
+  };
+
+  register: boolean = false;
 
   isLoggedIn = false;
   isLoginFailed = false;
 
   isLoggedInTest = false;
   isLoginFailedTest = false;
+
+  isSuccessful = false;
+  isSignUpFailed = false;
 
   errorMessage = "";
   roles: string[] = [];
@@ -57,15 +67,13 @@ export class LoginComponent implements OnInit {
 
   //-------------------------------------------------------------
 
-
-
-  onSubmit(): void {
-    console.log(this.form);
-    if(this.form.username == null){
-        alert("不能空白啦!")
-        return
+  onSubmitLoginForm(): void {
+    console.log(this.loginForm);
+    if (this.loginForm.username == null) {
+      alert("不能空白啦!");
+      return;
     }
-    const { username, password } = this.form;
+    const { username, password } = this.loginForm;
 
     this.loginAuthService.login(username, password).subscribe(
       (data) => {
@@ -94,7 +102,34 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  onSubmitRegisterForm() {
+    const { username, email, password } = this.registerForm;
+
+    this.loginAuthService.register(username, email, password).subscribe(
+      (data) => {
+        console.log(data);
+        this.isSuccessful = true;
+        this.isSignUpFailed = false;
+      },
+      (err) => {
+        this.errorMessage = err.error.message;
+        this.isSignUpFailed = true;
+      }
+    );
+  }
+
   reloadPage(): void {
     window.location.reload();
+  }
+
+  /**
+   * @summary 展開註冊表格，隱藏登入表格
+   */
+  goRegister() {
+    this.register = true;
+  }
+
+  goLogin() {
+    this.register = false;
   }
 }

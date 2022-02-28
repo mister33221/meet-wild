@@ -3,34 +3,76 @@
     <div class="container">
         <div class="col-md-4 content-center">
             <div class="card card-login card-plain">
-                <form class="form" method="" action="">
+                <form class="form" method="" action="" *ngIf="register == false">
                     <div class="header header-primary text-center">
                         <div class="logo-container">
                             <img src="assets/img/now-logo.png" alt="">
                         </div>
                     </div>
                     <div class="content">
-                        <form class="form-group" *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                        <form class="form-group" *ngIf="!isLoggedIn" name="loginForm" (ngSubmit)="f.loginForm.valid && onSubmit()" #f="ngForm" novalidate>
                             <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">  <i class="now-ui-icons users_circle-08"></i></span>
                                 </div>
-                                <input type="text" class="form-control" name="username" [(ngModel)]="form.username" placeholder="請輸入信箱..." (focus)="focus=true" (blur)="focus=false" #username="ngModel" required>
+                                <input type="text" class="form-control" name="username" [(ngModel)]="loginForm.username" placeholder="請輸入帳號..." (focus)="focus=true" (blur)="focus=false" #username="ngModel" required>
                             </div>
                             <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1===true}">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="now-ui-icons text_caps-small"></i></span>
                                 </div>
-                                <input type="password" name="password" [(ngModel)]="form.password" placeholder="請輸入密碼..." class="form-control" (focus)="focus1=true" (blur)="focus1=false" #password="ngModel" required/>
+                                <input type="password" name="password" [(ngModel)]="loginForm.password" placeholder="請輸入密碼..." class="form-control" (focus)="focus1=true" (blur)="focus1=false" #password="ngModel" required/>
                             </div>
                         </form>
                     </div>
                     <div class="footer text-center">
-                        <a href="javascript:void(0);" (click)="onSubmit()" class="btn btn-primary btn-round btn-lg btn-block">登入(TODO)</a>
+                        <a href="javascript:void(0);" (click)="onSubmitLoginForm()" class="btn btn-primary btn-round btn-lg btn-block">登入(TODO)</a>
                     </div>
                     <div class="pull-left">
                         <h6>
-                            <a href="#" class="link">註冊(TODO)</a>
+                            <a href="javascript:void(0);" class="link" (click)="goRegister()">註冊(TODO)</a>
+                        </h6>
+                    </div>
+                    <div class="pull-right">
+                        <h6>
+                            <a href="#" class="link">需要幫忙?(TODO)</a>
+                        </h6>
+                    </div>
+                </form>
+                <form class="form" method="" action="" *ngIf="register == true">
+                    <div class="header header-primary text-center">
+                        <div class="logo-container">
+                            <img src="assets/img/now-logo.png" alt="">
+                        </div>
+                    </div>
+                    <div class="content">
+                        <form class="form-group" *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.registerForm.valid && onSubmit()" #f="ngForm" novalidate>
+                            <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">  <i class="now-ui-icons users_circle-08"></i></span>
+                                </div>
+                                <input type="text" class="form-control" name="username" [(ngModel)]="registerForm.username" placeholder="請輸入帳號..." (focus)="focus=true" (blur)="focus=false" #username="ngModel" required>
+                            </div>
+                            <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">  <i class="now-ui-icons ui-1_email-85"></i></span>
+                                </div>
+                                <input type="text" class="form-control" name="username" [(ngModel)]="registerForm.email" placeholder="請輸入信箱..." (focus)="focus=true" (blur)="focus=false" #username="ngModel" required>
+                            </div>
+                            <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1===true}">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="now-ui-icons text_caps-small"></i></span>
+                                </div>
+                                <input type="password" name="password" [(ngModel)]="registerForm.password" placeholder="請輸入密碼..." class="form-control" (focus)="focus1=true" (blur)="focus1=false" #password="ngModel" required/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="footer text-center">
+                        <a href="javascript:void(0);" (click)="onSubmitRegisterForm()" class="btn btn-primary btn-round btn-lg btn-block">註冊(TODO)</a>
+                    </div>
+                    <div class="pull-left">
+                        <h6>
+                            <a href="javascript:void(0);" (click)="goLogin()" class="link">使用已有帳號登入(TODO)</a>
                         </h6>
                     </div>
                     <div class="pull-right">
