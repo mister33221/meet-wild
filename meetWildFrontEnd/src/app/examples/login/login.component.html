@@ -10,21 +10,23 @@
                         </div>
                     </div>
                     <div class="content">
-                        <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">  <i class="now-ui-icons users_circle-08"></i></span>
+                        <form class="form-group" *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                            <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">  <i class="now-ui-icons users_circle-08"></i></span>
+                                </div>
+                                <input type="text" class="form-control" name="username" [(ngModel)]="form.username" placeholder="請輸入信箱..." (focus)="focus=true" (blur)="focus=false" #username="ngModel" required>
                             </div>
-                            <input type="text" class="form-control" placeholder="請輸入信箱..." (focus)="focus=true" (blur)="focus=false">
-                        </div>
-                        <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1===true}">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="now-ui-icons text_caps-small"></i></span>
+                            <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1===true}">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="now-ui-icons text_caps-small"></i></span>
+                                </div>
+                                <input type="password" name="password" [(ngModel)]="form.password" placeholder="請輸入密碼..." class="form-control" (focus)="focus1=true" (blur)="focus1=false" #password="ngModel" required/>
                             </div>
-                            <input type="text" placeholder="請輸入密碼..." class="form-control" (focus)="focus1=true" (blur)="focus1=false" />
-                        </div>
+                        </form>
                     </div>
                     <div class="footer text-center">
-                        <a href="#" class="btn btn-primary btn-round btn-lg btn-block">登入(TODO)</a>
+                        <a href="javascript:void(0);" (click)="onSubmit()" class="btn btn-primary btn-round btn-lg btn-block">登入(TODO)</a>
                     </div>
                     <div class="pull-left">
                         <h6>

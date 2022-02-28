@@ -30,8 +30,9 @@ export class NavbarComponent implements OnInit {
     };
     sidebarClose() {
         const html = document.getElementsByTagName('html')[0];
-        // console.log(html);
-        this.toggleButton.classList.remove('toggled');
+        // console.log('????',html);
+        // TODO 不知道出錯原因暫時註解掉
+        // this.toggleButton.classList.remove('toggled');
         this.sidebarVisible = false;
         html.classList.remove('nav-open');
     };
