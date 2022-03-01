@@ -78,6 +78,7 @@ export class LoginComponent implements OnInit {
     this.loginAuthService.login(username, password).subscribe(
       (data) => {
         console.log(data);
+        alert(data)
 
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
@@ -94,7 +95,9 @@ export class LoginComponent implements OnInit {
       },
       (err) => {
         console.log(err.error);
-        this.errorMessage = err.error.message;
+        alert(err.message)
+        console.log(err.message)
+        this.errorMessage = err.message;
         this.isLoginFailed = true;
 
         this.tokenStorage.isLoginFailedTest.next(true);
@@ -108,10 +111,12 @@ export class LoginComponent implements OnInit {
     this.loginAuthService.register(username, email, password).subscribe(
       (data) => {
         console.log(data);
+        alert(data.message)
         this.isSuccessful = true;
         this.isSignUpFailed = false;
       },
       (err) => {
+        alert(err.error)
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
       }
