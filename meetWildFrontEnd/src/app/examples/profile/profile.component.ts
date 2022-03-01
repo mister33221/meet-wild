@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as Rellax from 'rellax';
+import { TokenStorageService } from '../login/service/token-storage.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,9 +17,21 @@ export class ProfileComponent implements OnInit {
     focus;
     focus1;
 
-    constructor() { }
+    loggedInNameTest = '';
+    isLoggedInTest = false;
+    isLoginFailedTest = false;
+
+    authUser: any = null;
+
+    constructor(
+      private tokenStorageService: TokenStorageService, 
+      private router: Router,
+      private activatedRoute: ActivatedRoute,
+    ) { }
 
     ngOnInit() {
+      this.updateLoggedInStatus();
+
       var rellaxHeader = new Rellax('.rellax-header');
 
         var body = document.getElementsByTagName('body')[0];
@@ -30,6 +44,29 @@ export class ProfileComponent implements OnInit {
         body.classList.remove('profile-page');
         var navbar = document.getElementsByTagName('nav')[0];
         navbar.classList.remove('navbar-transparent');
+    }
+
+    updateLoggedInStatus() {
+
+      //訂閱登入狀態
+      this.tokenStorageService.isLoggedInTest.subscribe(
+        data => this.isLoggedInTest = data
+      )
+      //訂閱登入狀態
+      this.tokenStorageService.isLoginFailedTest.subscribe(
+        data => this.isLoginFailedTest = data
+      )
+  
+      //訂閱登入者名稱
+      this.tokenStorageService.loggedInNameTest.subscribe(
+        data => this.loggedInNameTest = data
+      )
+
+      //訂閱登入者所有資料
+      this.tokenStorageService.authUser.subscribe(
+          data => 
+          this.authUser = data
+        )
     }
 
 }

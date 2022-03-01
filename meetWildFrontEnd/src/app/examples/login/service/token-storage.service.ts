@@ -23,6 +23,7 @@ export class TokenStorageService {
   loggedInNameTest: Subject<string> = new BehaviorSubject<string>(null);
   isLoggedInTest: Subject<boolean> = new BehaviorSubject<boolean>(false);
   isLoginFailedTest: Subject<boolean> = new BehaviorSubject<boolean>(false);
+  authUser: Subject<any> = new BehaviorSubject<boolean>(null);
 
   constructor() { }
 
@@ -69,10 +70,11 @@ export class TokenStorageService {
    */
   public getUser(): any {
     const user = window.sessionStorage.getItem(USER_KEY);
-
-    console.log(window.sessionStorage)
+    console.log('123',JSON.parse(user))
+    console.log('456',window.sessionStorage)
     if (user) {
-      this.loggedInNameTest.next(JSON.parse(user).username)
+      this.loggedInNameTest.next(JSON.parse(user).username);
+      this.authUser.next(JSON.parse(user));
       return JSON.parse(user);
     }
 
