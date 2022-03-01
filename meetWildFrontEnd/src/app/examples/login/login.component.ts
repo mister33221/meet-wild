@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
     this.loginAuthService.login(username, password).subscribe(
       (data) => {
         console.log(data);
-        alert(data)
+        alert("登入成功")
 
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
@@ -90,8 +90,7 @@ export class LoginComponent implements OnInit {
         this.tokenStorage.isLoginFailedTest.next(false);
 
         this.roles = this.tokenStorage.getUser().roles;
-        // this.reloadPage();
-        // this.router.navigate(['/product'], { relativeTo: this.route });
+        this.router.navigate(['/examples/landing'], { relativeTo: this.route });
       },
       (err) => {
         console.log(err.error);
