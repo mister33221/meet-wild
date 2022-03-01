@@ -24,6 +24,8 @@ export class NavbarComponent implements OnInit {
     showModeratorBoard = false;
     username?: string;
 
+    authUser: any[] = [];
+
     constructor(
         public location: Location, 
         private element : ElementRef,
@@ -111,5 +113,11 @@ export class NavbarComponent implements OnInit {
         this.tokenStorageService.loggedInNameTest.subscribe(
           data => this.loggedInNameTest = data
         )
+
+        //訂閱登入者所有資料
+        this.tokenStorageService.authUser.subscribe(
+            data => 
+            this.authUser = data
+          )
       }
 }
